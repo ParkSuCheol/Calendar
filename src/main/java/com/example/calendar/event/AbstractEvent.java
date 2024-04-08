@@ -42,4 +42,12 @@ public abstract class AbstractEvent implements Event{
     public String getTitle(){
         return this.title;
     }
+
+
+    public ZonedDateTime getStartAt() {
+        return startAt;
+    }
+    public ZonedDateTime getEndAt() {
+        return endAt;
+    }
 }
