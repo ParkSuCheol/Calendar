@@ -6,6 +6,7 @@ import com.example.calendar.event.EventType;
 import com.example.calendar.event.Meeting;
 import com.example.calendar.event.Schedule;
 import com.example.calendar.event.Todo;
+import com.example.calendar.event.update.UpdateMeeting;
 import com.example.calendar.reader.EventCsvReader;
 import java.io.IOException;
 import java.time.ZonedDateTime;
@@ -24,6 +25,33 @@ public class CalendarAppApplication {
         List<Meeting> meetings = csvReader.readMeetings(meetingCsvPath);
         meetings.forEach(each -> schedule.add(each));
 
-        schedule.printAll();
+        Meeting meeting = meetings.get(0);
+        meeting.print();
+
+        System.out.println("수정 후 ...");
+        meetings.get(0).validateAndUpdate(
+                new UpdateMeeting(
+                        "new title",
+                        ZonedDateTime.now(),
+                        ZonedDateTime.now().plusHours(1),
+                        null,
+                        "A",
+                        "new agenda"
+                )
+        );
+
+        meeting.delete(true);
+        System.out.println("수정 후 삭제 시도");
+        meetings.get(0).validateAndUpdate(
+                new UpdateMeeting(
+                        "new title",
+                        ZonedDateTime.now(),
+                        ZonedDateTime.now().plusHours(1),
+                        null,
+                        "B",
+                        "new agenda 2"
+                )
+        );
+        meeting.print();
     }
 }
