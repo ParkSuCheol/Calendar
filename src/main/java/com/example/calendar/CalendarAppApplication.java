@@ -33,7 +33,7 @@ public class CalendarAppApplication {
                         "new agenda"
                 )
         );
-
+        meeting.print();
         meeting.delete(true);
         System.out.println("수정 후 삭제 시도");
         meetings.get(0).validateAndUpdate(
